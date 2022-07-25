@@ -34,11 +34,8 @@ def User_login(request):
             fm = AuthenticationForm()
         return render(request,'reg/login.html',{'form':fm})
     else:
-        return HttpResponseRedirect('/prof/')
-
-
-
-
+        return HttpResponseRedirect('/profile/')
+        
 def User_profile(request):
     if request.user.is_authenticated:
         return render(request, 'reg/profile.html',{'name':request.user})

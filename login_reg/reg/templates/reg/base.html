@@ -17,7 +17,7 @@
 			margin: 0;
 			padding: 0;
 			height: 100%;
-			background: #7abecc !important;
+			background: #7abecc ;
 		}
 		.user_card {
 			width: 350px;
@@ -70,7 +70,23 @@
 	</style>
 </head>
 <body>
+    <div class="container h-100">
+        <nav class="navbar navbar-expand-lg navbar-light rounded" style="background-color: #254e47;">
+            <a class="navbar-brand text-light ml-3 " href="{% url 'signup' %}"> My Site</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav">
+                <a class="nav-item nav-link active text-light" href="{% url 'signup' %}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link text-light" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link text-light" href="{% url 'signup' %}">Sign-Up</a>
+                <a class="nav-item nav-link text-light" href="{% url 'profile' %}"  >My Profile</a>
+              </div>
+            </div>
+          </nav>
         {% block content %} {% endblock content %}
+
     </div>
     <script src="{% static ' reg/js/jquery.js' %}"></script>
     <script src="{% static ' reg/js/popper.js' %}"></script>
