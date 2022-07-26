@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import SignUpForm
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm , PasswordChangeForm
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 # Create your views here.
 def Sign_up(request):
     if request.method == 'POST':
@@ -47,3 +47,17 @@ def User_logout(request):
     logout(request)
     return HttpResponseRedirect('/login/')
 
+def user_change_pass(request):
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            fm = PasswordChangeForm(user=request.user, data = request.POST)
+            if fm.is_valid():
+                fm.save()
+                update_session_auth_hash(request, fm.user)
+                messages.success(request, 'Password Changed Successfully')
+                return HttpResponseRedirect('/profile/')
+        else:
+            fm = PasswordChangeForm(user=request.user)
+        return render(request, 'reg/changepass.html', {'form':fm})
+    else:
+        return HttpResponseRedirect('/login/')
